@@ -16,6 +16,7 @@ def catch_all(path):
 		os.makedirs('data')
 	
 	print state
+	print time.ctime(os.path.getmtime('config.json'))
 	if not os.path.isfile('data/state.json'):
 		bookmarks = json.load(open('config.json','r'))
 		for category in bookmarks:
@@ -46,9 +47,11 @@ def catch_all(path):
 				for page in bookmarks[category]:
 					bookmarks[category][page] = newbookmarks[category][page]
 			else:
-				for page in bookmarks[category]:
+				for page in newbookmarks[category]:
 					if page not in bookmarks[category]:
 						bookmarks[category][page] = newbookmarks[category][page]
+						bookmarks[category][page]['last_checked'] = time.time()
+						bookmarks[category][page]['checks'] = bookmarks[category][page]['checksAvailable']
 					else:
 						for item in newbookmarks[category][page]:
 							if bookmarks[category][page][item] != newbookmarks[category][page][item]:
@@ -80,24 +83,22 @@ def catch_all(path):
 			
 			if time.time()-bookmarks[category][page]['last_checked'] > 24*60*60:
 				if bookmarks[category][page]['frequency'] == 'daily' or bookmarks[category][page]['frequency'] == day_of_week or (day_of_week=='sunday' and bookmarks[category][page]['frequency']=='weekly') or bookmarks[category][page]['frequency']==day_of_month or (bookmarks[category][page]['frequency']=='monthly' and day_of_month=='10'):
-					print bookmarks[category][page]['name']
 					bookmarks[category][page]['checks'] = bookmarks[category][page]['checksAvailable']
 					bookmarks[category][page]['last_checked'] = time.time()
-					json.dump(bookmarks,open('data/bookmarks.json','w'),sort_keys=True,indent=4, separators=(',', ': '))
 				
 			
 			
-			if target_category == category and target_name == bookmarks[category][page]['name']:
+			if target_category == category and target_name == page:
 				redirectUrl = bookmarks[category][page]['url']
 				bookmarks[category][page]['checks'] = bookmarks[category][page]['checks'] - 1
-				json.dump(bookmarks,open('data/bookmarks.json','w'),sort_keys=True,indent=4, separators=(',', ': '))
 				break
 			if bookmarks[category][page]['checks'] > 0:
 				if category not in navigation:
 					navigation[category] = []
 				navigation[category].append({'url':'/' + category + '/' + page, 'name':page})
 	
-				
+	state['bookmarks']=bookmarks
+	json.dump(state,open('data/state.json','w'),sort_keys=True,indent=4, separators=(',', ': '))
 	if len(redirectUrl)>0:
 		return redirect(redirectUrl, code=302)
 	else:
