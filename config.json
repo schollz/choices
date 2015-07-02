@@ -94,6 +94,14 @@
         "frequency": "10",
         "checksAvailable": 1,
         "checks": 1
+    },
+    {
+        "name": "Newest Netflix additions"",
+        "category": "Google Searches",
+        "url": "https://www.google.com/webhp?sourceid=chrome-instant&rlz=1C1CHKZ_enUS432US432&ion=1&espv=2&ie=UTF-8#q=newest%20netflix%20additions",
+        "frequency": "monthly",
+        "checksAvailable": 1,
+        "checks": 1
     }
     
     
