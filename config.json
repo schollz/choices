@@ -1,108 +1,119 @@
-[
-    {
-        "name": "PNAS",
-        "category": "Science",
-        "url": "http://www.pnas.org/",
-        "frequency": "friday",
-        "checksAvailable": 2,
-        "checks": 1
-    },
-    {
-        "name": "Nature",
-        "category": "Science",
-        "url": "http://www.nature.com/nature/current_issue.html",
-        "frequency": "thursday",
-        "checksAvailable": 2,
-        "checks": 1
-    },
-    {
-        "name": "ScienceMag",
-        "category": "Science",
-        "url": "http://www.sciencemag.org/content/current",
-        "frequency": "friday",
-        "checksAvailable": 2,
-        "checks": 1
-    },
-    {
-        "name": "GMail",
-        "category": "Email",
-        "url": "https://mail.google.com/mail/u/0/?pli=1",
-        "frequency": "daily",
-        "checksAvailable": 10,
-        "checks": 1
-    },
-    {
-        "name": "Kickstarter",
-        "category": "Technology",
-        "url": "https://www.kickstarter.com/discover/categories/technology?ref=discover_index",
-        "frequency": "monthly",
-        "checksAvailable": 1,
-        "checks": 1
-    },
-    {
-        "name": "Hacker News",
-        "category": "News",
-        "url": "https://news.ycombinator.com/",
-        "frequency": "daily",
-        "checksAvailable": 1,
-        "checks": 1
-    },
-    {
-        "name": "Google News",
-        "category": "News",
-        "url": "https://news.google.com/",
-        "frequency": "daily",
-        "checksAvailable": 1,
-        "checks": 1
-    },
-    {
-        "name": "Rotten Tomatoes",
-        "category": "Movie Reviews",
-        "url": "http://www.rottentomatoes.com/",
-        "frequency": "saturday",
-        "checksAvailable": 1,
-        "checks": 1
-    },
-    {
-        "name": "Andrew O'Hehir reviews",
-        "category": "Movie Reviews",
-        "url": "http://www.salon.com/writer/andrew_ohehir/",
-        "frequency": "thursday",
-        "checksAvailable": 1,
-        "checks": 1
-    },
-    {
-        "name": "Google Analytics",
-        "category": "Web Development",
-        "url": "https://www.google.com/analytics/web/?hl=en",
-        "frequency": "weekly",
-        "checksAvailable": 1,
-        "checks": 1
-    },
-    {
-        "name": "Bitly Analytics",
-        "category": "Web Development",
-        "url": "https://bitly.com/a/bitlinks",
-        "frequency": "weekly",
-        "checksAvailable": 1,
-        "checks": 1
-    },
-    {
-        "name": "Wells Fargo",
-        "category": "Bills",
-        "url": "https://www.wellsfargo.com/",
-        "frequency": "10",
-        "checksAvailable": 1,
-        "checks": 1
-    },
-    {
-        "name": "Newest Netflix additions",
-        "category": "Google Searches",
-        "url": "https://www.google.com/webhp?sourceid=chrome-instant&rlz=1C1CHKZ_enUS432US432&ion=1&espv=2&ie=UTF-8#q=newest%20netflix%20additions",
-        "frequency": "monthly",
-        "checksAvailable": 1,
-        "checks": 1
-    }
-    
-    
-]
+{
+    "Science": [
+        {
+            "name": "PNAS",
+            "category": "Science",
+            "url": "http://www.pnas.org/",
+            "frequency": "friday",
+            "checksAvailable": 2,
+            "checks": 1
+        },
+        {
+            "name": "Nature",
+            "category": "Science",
+            "url": "http://www.nature.com/nature/current_issue.html",
+            "frequency": "thursday",
+            "checksAvailable": 2,
+            "checks": 1
+        },
+        {
+            "name": "ScienceMag",
+            "category": "Science",
+            "url": "http://www.sciencemag.org/content/current",
+            "frequency": "friday",
+            "checksAvailable": 2,
+            "checks": 1
+        }
+    ],
+    "Email": [
+        {
+            "name": "GMail",
+            "category": "Email",
+            "url": "https://mail.google.com/mail/u/0/?pli=1",
+            "frequency": "daily",
+            "checksAvailable": 10,
+            "checks": 1
+        }
+    ],
+    "Technology": [
+        {
+            "name": "Kickstarter",
+            "category": "Technology",
+            "url": "https://www.kickstarter.com/discover/categories/technology?ref=discover_index",
+            "frequency": "monthly",
+            "checksAvailable": 1,
+            "checks": 1
+        }
+    ],
+    "News": [
+        {
+            "name": "Hacker News",
+            "category": "News",
+            "url": "https://news.ycombinator.com/",
+            "frequency": "daily",
+            "checksAvailable": 1,
+            "checks": 1
+        },
+        {
+            "name": "Google News",
+            "category": "News",
+            "url": "https://news.google.com/",
+            "frequency": "daily",
+            "checksAvailable": 1,
+            "checks": 1
+        }
+    ],
+    "Movie Reviews": [
+        {
+            "name": "Rotten Tomatoes",
+            "category": "Movie Reviews",
+            "url": "http://www.rottentomatoes.com/",
+            "frequency": "saturday",
+            "checksAvailable": 1,
+            "checks": 1
+        },
+        {
+            "name": "Andrew O'Hehir reviews",
+            "category": "Movie Reviews",
+            "url": "http://www.salon.com/writer/andrew_ohehir/",
+            "frequency": "thursday",
+            "checksAvailable": 1,
+            "checks": 1
+        }
+    ],
+    "Web Development": [
+        {
+            "name": "Google Analytics",
+            "url": "https://www.google.com/analytics/web/?hl=en",
+            "frequency": "weekly",
+            "checksAvailable": 1,
+            "checks": 1
+        },
+        {
+            "name": "Bitly Analytics",
+            "url": "https://bitly.com/a/bitlinks",
+            "frequency": "weekly",
+            "checksAvailable": 1,
+            "checks": 1
+        }
+    ],
+    "Bills": [
+        {
+            "name": "Wells Fargo",
+            "category": "Bills",
+            "url": "https://www.wellsfargo.com/",
+            "frequency": "10",
+            "checksAvailable": 1,
+            "checks": 1
+        }
+    ],
+    "Google Searches": [
+        {
+            "name": "Newest Netflix additions",
+            "url": "https://www.google.com/webhp?sourceid=chrome-instant&rlz=1C1CHKZ_enUS432US432&ion=1&espv=2&ie=UTF-8#q=newest%20netflix%20additions",
+            "frequency": "monthly",
+            "checksAvailable": 1,
+            "checks": 1
+        }
+    ]
+}
