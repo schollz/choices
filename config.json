@@ -1,0 +1,42 @@
+[
+    {
+        "name": "PNAS",
+        "category": "Science",
+        "url": "http://www.pnas.org/",
+        "frequency": "friday",
+        "checksAvailable": 1,
+        "checks": 1
+    },
+    {
+        "name": "Nature",
+        "category": "Science",
+        "url": "http://www.nature.com/nature/current_issue.html",
+        "frequency": "thursday",
+        "checksAvailable": 1,
+        "checks": 1
+    },
+    {
+        "name": "GMail",
+        "category": "Email",
+        "url": "https://mail.google.com/mail/u/0/?pli=1",
+        "frequency": "daily",
+        "checksAvailable": 10,
+        "checks": 1
+    },
+    {
+        "name": "Kickstarter",
+        "category": "Technology",
+        "url": "https://www.kickstarter.com/discover/categories/technology?ref=discover_index",
+        "frequency": "monthly",
+        "checksAvailable": 10,
+        "checks": 1
+    },
+    {
+        "name": "Kickstarter",
+        "category": "News",
+        "url": "https://news.ycombinator.com/",
+        "frequency": "daily",
+        "checksAvailable": 1,
+        "checks": 1
+    }
+]
