@@ -1,0 +1,13 @@
+<!doctype html>
+<title>Flaskr</title>
+<div class=page>
+  <h1>Flaskr</h1>
+    {% for category in navigation %}
+		<h2>{{ category }}</h2>
+		{% for item in navigation[category] %}
+			{% if item.checks>0 %}
+        <li><a href="/{{ category }}/{{item.name}}">{{ item.name }}</a></li>
+			{% endif %}
+    {% endfor %}
+    {% endfor %}
+</div>
