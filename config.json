@@ -1,1 +1,119 @@
-{"Google Searches": [{"url": "https://www.google.com/webhp?sourceid=chrome-instant&rlz=1C1CHKZ_enUS432US432&ion=1&espv=2&ie=UTF-8#q=newest%20netflix%20additions", "checks": 1, "frequency": "monthly", "name": "Newest Netflix additions", "checksAvailable": 1}], "Science": [{"category": "Science", "name": "PNAS", "url": "http://www.pnas.org/", "frequency": "friday", "checksAvailable": 2, "checks": 0}, {"category": "Science", "name": "Nature", "url": "http://www.nature.com/nature/current_issue.html", "frequency": "thursday", "checksAvailable": 2, "checks": 1}, {"category": "Science", "name": "ScienceMag", "url": "http://www.sciencemag.org/content/current", "frequency": "friday", "checksAvailable": 2, "checks": 1}], "Movie Reviews": [{"category": "Movie Reviews", "name": "Rotten Tomatoes", "url": "http://www.rottentomatoes.com/", "frequency": "saturday", "checksAvailable": 1, "checks": 1}, {"category": "Movie Reviews", "name": "Andrew O'Hehir reviews", "url": "http://www.salon.com/writer/andrew_ohehir/", "frequency": "thursday", "checksAvailable": 1, "checks": 1}], "News": [{"category": "News", "name": "Hacker News", "url": "https://news.ycombinator.com/", "frequency": "daily", "checksAvailable": 1, "checks": 1}, {"category": "News", "name": "Google News", "url": "https://news.google.com/", "frequency": "daily", "checksAvailable": 1, "checks": 1}], "Bills": [{"category": "Bills", "name": "Wells Fargo", "url": "https://www.wellsfargo.com/", "frequency": "10", "checksAvailable": 1, "checks": 1}], "Technology": [{"category": "Technology", "name": "Kickstarter", "url": "https://www.kickstarter.com/discover/categories/technology?ref=discover_index", "frequency": "monthly", "checksAvailable": 1, "checks": 1}], "Email": [{"category": "Email", "name": "GMail", "url": "https://mail.google.com/mail/u/0/?pli=1", "frequency": "daily", "checksAvailable": 10, "checks": 1}], "Web Development": [{"url": "https://www.google.com/analytics/web/?hl=en", "checks": 1, "frequency": "weekly", "name": "Google Analytics", "checksAvailable": 1}, {"url": "https://bitly.com/a/bitlinks", "checks": 1, "frequency": "weekly", "name": "Bitly Analytics", "checksAvailable": 1}]}
+{
+    "Bills": [
+        {
+            "category": "Bills",
+            "checks": 1,
+            "checksAvailable": 1,
+            "frequency": "1",
+            "name": "Wells Fargo",
+            "url": "https://www.wellsfargo.com/"
+        }
+    ],
+    "Email": [
+        {
+            "category": "Email",
+            "checks": 9,
+            "checksAvailable": 10,
+            "frequency": "daily",
+            "name": "GMail",
+            "url": "https://mail.google.com/mail/u/0/?pli=1"
+        }
+    ],
+    "Google Searches": [
+        {
+            "checks": 0,
+            "checksAvailable": 1,
+            "frequency": "monthly",
+            "name": "Newest Netflix additions",
+            "url": "https://www.google.com/webhp?sourceid=chrome-instant&rlz=1C1CHKZ_enUS432US432&ion=1&espv=2&ie=UTF-8#q=newest%20netflix%20additions"
+        }
+    ],
+    "Movie Reviews": [
+        {
+            "category": "Movie Reviews",
+            "checks": 1,
+            "checksAvailable": 1,
+            "frequency": "saturday",
+            "name": "Rotten Tomatoes",
+            "url": "http://www.rottentomatoes.com/"
+        },
+        {
+            "category": "Movie Reviews",
+            "checks": 1,
+            "checksAvailable": 1,
+            "frequency": "thursday",
+            "name": "Andrew O'Hehir reviews",
+            "url": "http://www.salon.com/writer/andrew_ohehir/"
+        }
+    ],
+    "News": [
+        {
+            "category": "News",
+            "checks": 1,
+            "checksAvailable": 1,
+            "frequency": "daily",
+            "name": "Hacker News",
+            "url": "https://news.ycombinator.com/"
+        },
+        {
+            "category": "News",
+            "checks": 1,
+            "checksAvailable": 1,
+            "frequency": "daily",
+            "name": "Google News",
+            "url": "https://news.google.com/"
+        }
+    ],
+    "Science": [
+        {
+            "category": "Science",
+            "checks": 0,
+            "checksAvailable": 2,
+            "frequency": "friday",
+            "name": "PNAS",
+            "url": "http://www.pnas.org/"
+        },
+        {
+            "category": "Science",
+            "checks": 0,
+            "checksAvailable": 2,
+            "frequency": "thursday",
+            "name": "Nature",
+            "url": "http://www.nature.com/nature/current_issue.html"
+        },
+        {
+            "category": "Science",
+            "checks": 0,
+            "checksAvailable": 2,
+            "frequency": "friday",
+            "name": "ScienceMag",
+            "url": "http://www.sciencemag.org/content/current"
+        }
+    ],
+    "Technology": [
+        {
+            "category": "Technology",
+            "checks": 0,
+            "checksAvailable": 1,
+            "frequency": "monthly",
+            "name": "Kickstarter",
+            "url": "https://www.kickstarter.com/discover/categories/technology?ref=discover_index"
+        }
+    ],
+    "Web Development": [
+        {
+            "checks": 1,
+            "checksAvailable": 1,
+            "frequency": "weekly",
+            "name": "Google Analytics",
+            "url": "https://www.google.com/analytics/web/?hl=en"
+        },
+        {
+            "checks": 1,
+            "checksAvailable": 1,
+            "frequency": "weekly",
+            "name": "Bitly Analytics",
+            "url": "https://bitly.com/a/bitlinks"
+        }
+    ]
+}

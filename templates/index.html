@@ -5,9 +5,7 @@
     {% for category in navigation %}
 		<h2>{{ category }}</h2>
 		{% for item in navigation[category] %}
-			{% if item.checks>0 %}
-        <li><a href="/{{ category }}/{{item.name}}">{{ item.name }}</a></li>
-			{% endif %}
+        <li><a href="{{item.url}}">{{ item.name }}</a></li>
     {% endfor %}
     {% endfor %}
 </div>
