@@ -4,7 +4,7 @@
         "category": "Science",
         "url": "http://www.pnas.org/",
         "frequency": "friday",
-        "checksAvailable": 1,
+        "checksAvailable": 2,
         "checks": 1
     },
     {
@@ -12,7 +12,15 @@
         "category": "Science",
         "url": "http://www.nature.com/nature/current_issue.html",
         "frequency": "thursday",
-        "checksAvailable": 1,
+        "checksAvailable": 2,
+        "checks": 1
+    },
+    {
+        "name": "ScienceMag",
+        "category": "Science",
+        "url": "http://www.sciencemag.org/content/current",
+        "frequency": "friday",
+        "checksAvailable": 2,
         "checks": 1
     },
     {
@@ -28,15 +36,65 @@
         "category": "Technology",
         "url": "https://www.kickstarter.com/discover/categories/technology?ref=discover_index",
         "frequency": "monthly",
-        "checksAvailable": 10,
+        "checksAvailable": 1,
         "checks": 1
     },
     {
-        "name": "Kickstarter",
+        "name": "Hacker News",
         "category": "News",
         "url": "https://news.ycombinator.com/",
         "frequency": "daily",
         "checksAvailable": 1,
         "checks": 1
+    },
+    {
+        "name": "Google News",
+        "category": "News",
+        "url": "https://news.google.com/",
+        "frequency": "daily",
+        "checksAvailable": 1,
+        "checks": 1
+    },
+    {
+        "name": "Rotten Tomatoes",
+        "category": "Movie Reviews",
+        "url": "http://www.rottentomatoes.com/",
+        "frequency": "saturday",
+        "checksAvailable": 1,
+        "checks": 1
+    },
+    {
+        "name": "Andrew O'Hehir reviews",
+        "category": "Movie Reviews",
+        "url": "http://www.salon.com/writer/andrew_ohehir/",
+        "frequency": "thursday",
+        "checksAvailable": 1,
+        "checks": 1
+    },
+    {
+        "name": "Google Analytics",
+        "category": "Web Development",
+        "url": "https://www.google.com/analytics/web/?hl=en",
+        "frequency": "weekly",
+        "checksAvailable": 1,
+        "checks": 1
+    },
+    {
+        "name": "Bitly Analytics",
+        "category": "Web Development",
+        "url": "https://bitly.com/a/bitlinks",
+        "frequency": "weekly",
+        "checksAvailable": 1,
+        "checks": 1
+    },
+    {
+        "name": "Wells Fargo",
+        "category": "Bills",
+        "url": "https://www.wellsfargo.com/",
+        "frequency": "10",
+        "checksAvailable": 1,
+        "checks": 1
     }
+    
+    
 ]
