@@ -10,6 +10,11 @@
             "frequency": "thursday",
             "url": "http://www.nature.com/nature/current_issue.html"
         },
+        "Biophysical Journakl": {
+            "checksAvailable": 2,
+            "frequency": "friday",
+            "url": "http://www.sciencemag.org/content/current"
+        },
         "Science": {
             "checksAvailable": 2,
             "frequency": "friday",
