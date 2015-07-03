@@ -11,6 +11,7 @@ app.config['DEBUG'] = True
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
+	start = time.time()
 	state = {}
 	if not os.path.exists('data'):
 		os.makedirs('data')
@@ -79,15 +80,14 @@ def catch_all(path):
 	bookmarks = state['bookmarks']
 	for category in bookmarks:
 		for page in bookmarks[category]:
-				
 			
+			# Update the checks from checksAvailable if it matches criteria
 			if time.time()-bookmarks[category][page]['last_checked'] > 24*60*60:
 				if bookmarks[category][page]['frequency'] == 'daily' or bookmarks[category][page]['frequency'] == day_of_week or (day_of_week=='sunday' and bookmarks[category][page]['frequency']=='weekly') or bookmarks[category][page]['frequency']==day_of_month or (bookmarks[category][page]['frequency']=='monthly' and day_of_month=='10'):
 					bookmarks[category][page]['checks'] = bookmarks[category][page]['checksAvailable']
 					bookmarks[category][page]['last_checked'] = time.time()
-				
-			
-			
+							
+			# Determine whether we need to redirect page
 			if target_category == category and target_name == page:
 				redirectUrl = bookmarks[category][page]['url']
 				bookmarks[category][page]['checks'] = bookmarks[category][page]['checks'] - 1
@@ -99,6 +99,8 @@ def catch_all(path):
 	
 	state['bookmarks']=bookmarks
 	json.dump(state,open('data/state.json','w'),sort_keys=True,indent=4, separators=(',', ': '))
+
+	print "Took ",time.time()-start
 	if len(redirectUrl)>0:
 		return redirect(redirectUrl, code=302)
 	else:

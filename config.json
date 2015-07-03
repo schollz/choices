@@ -10,15 +10,44 @@
             "frequency": "thursday",
             "url": "http://www.nature.com/nature/current_issue.html"
         },
-        "Biophysical Journal": {
-            "checksAvailable": 2,
-            "frequency": "friday",
-            "url": "http://www.sciencemag.org/content/current"
-        },
         "Science": {
             "checksAvailable": 2,
             "frequency": "friday",
             "url": "http://www.sciencemag.org/content/current"
+        }
+    },
+    "News": {
+        "Hacker News": {
+            "checksAvailable": 1,
+            "frequency": "daily",
+            "url": "https://news.ycombinator.com/"
+        },
+        "Google News": {
+            "checksAvailable": 1,
+            "frequency": "daily",
+            "url": "https://news.google.com/"
+        },
+        "New York Times - Science": {
+            "checksAvailable": 1,
+            "frequency": "weekly",
+            "url": "http://www.nytimes.com/section/science"
+        }
+    },
+    "Entertainment News": {
+        "Monkey See Blog": {
+            "checksAvailable": 1,
+            "frequency": "weekly",
+            "url": "http://www.npr.org/sections/monkeysee/"
+        },
+        "Rotten Tomatoes": {
+            "checksAvailable": 1,
+            "frequency": "weekly",
+            "url": "https://www.rottentomatoes.com"
+        },
+        "Movie Reviews": {
+            "checksAvailable": 1,
+            "frequency": "weekly",
+            "url": "http://www.salon.com/writer/andrew_ohehir/"
         }
     }
 }
