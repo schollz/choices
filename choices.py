@@ -38,28 +38,34 @@ def generate_navigation(path):
 	
 	# Load new state
 	state = json.load(open('data/state.json','r'),object_pairs_hook=OrderedDict)
-	
-	if 'last_modification' not in state or state['last_modification'] != time.ctime(os.path.getmtime('config.json')):
-		# update current bookmarks
-		bookmarks = state['bookmarks']
-		newbookmarks = json.load(open('config.json','r'),object_pairs_hook=OrderedDict)
-		for category in newbookmarks:
-			if category not in bookmarks:
-				bookmarks[category] = {}				
-				for page in bookmarks[category]:
+
+	# update current bookmarks
+	bookmarks = state['bookmarks']
+	newbookmarks = json.load(open('config.json','r'),object_pairs_hook=OrderedDict)
+	for category in newbookmarks:
+		if category not in bookmarks:
+			bookmarks[category] = {}				
+			for page in bookmarks[category]:
+				bookmarks[category][page] = newbookmarks[category][page]
+		else:
+			for page in newbookmarks[category]:
+				if page not in bookmarks[category]:
 					bookmarks[category][page] = newbookmarks[category][page]
-			else:
-				for page in newbookmarks[category]:
-					if page not in bookmarks[category]:
-						bookmarks[category][page] = newbookmarks[category][page]
-						bookmarks[category][page]['last_checked'] = int(time.time()/(60*60*24))
-						bookmarks[category][page]['checks'] = bookmarks[category][page]['checksAvailable']
-					else:
-						for item in newbookmarks[category][page]:
-							if bookmarks[category][page][item] != newbookmarks[category][page][item]:
-								bookmarks[category][page][item] = newbookmarks[category][page][item]
-			
-		state['last_modification']=time.ctime(os.path.getmtime('config.json'))
+					bookmarks[category][page]['last_checked'] = int(time.time()/(60*60*24))
+					bookmarks[category][page]['checks'] = bookmarks[category][page]['checksAvailable']
+				else:
+					for item in newbookmarks[category][page]:
+						if bookmarks[category][page][item] != newbookmarks[category][page][item]:
+							bookmarks[category][page][item] = newbookmarks[category][page][item]
+								
+	# reordering
+	reordered = OrderedDict()
+	for category in newbookmarks:
+		reordered[category] = bookmarks[category]		
+	
+	state['bookmarks'] = reordered
+		
+	state['last_modification']=time.ctime(os.path.getmtime('config.json'))
 	
 	
 
