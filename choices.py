@@ -64,7 +64,11 @@ def generate_navigation(path):
 	# reordering
 	reordered = OrderedDict()
 	for category in newbookmarks:
-		reordered[category] = bookmarks[category]			
+		reordered[category] = OrderedDict()
+		for page in newbookmarks[category]:
+			reordered[category][page] = bookmarks[category][page]
+		
+	
 	state['bookmarks'] = reordered
 	state['last_modification']=time.ctime(os.path.getmtime('config.json'))
 	
