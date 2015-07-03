@@ -14,6 +14,9 @@ def random_line(afile):
     return line
 
 def generate_navigation(path):
+	day_of_week = datetime.now().strftime('%A').lower()
+	day_of_month = str(int(datetime.now().strftime('%d')))
+
 	state = OrderedDict()
 	if not os.path.exists('data'):
 		os.makedirs('data')
@@ -44,7 +47,7 @@ def generate_navigation(path):
 	newbookmarks = json.load(open('config.json','r'),object_pairs_hook=OrderedDict)
 	for category in newbookmarks:
 		if category not in bookmarks:
-			bookmarks[category] = {}				
+			bookmarks[category] = OrderedDict()
 			for page in bookmarks[category]:
 				bookmarks[category][page] = newbookmarks[category][page]
 		else:
@@ -61,17 +64,10 @@ def generate_navigation(path):
 	# reordering
 	reordered = OrderedDict()
 	for category in newbookmarks:
-		reordered[category] = bookmarks[category]		
-	
+		reordered[category] = bookmarks[category]			
 	state['bookmarks'] = reordered
-		
 	state['last_modification']=time.ctime(os.path.getmtime('config.json'))
 	
-	
-
-	
-	day_of_week = datetime.now().strftime('%A').lower()
-	day_of_month = str(int(datetime.now().strftime('%d')))
 
 	# Check if redirect is needed
 	newsite = path.split('/')
