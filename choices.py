@@ -88,6 +88,13 @@ def generate_navigation(path):
 				if bookmarks[category][page]['frequency'] == 'daily' or bookmarks[category][page]['frequency'] == day_of_week or (day_of_week=='sunday' and bookmarks[category][page]['frequency']=='weekly') or bookmarks[category][page]['frequency']==day_of_month or (bookmarks[category][page]['frequency']=='monthly' and day_of_month=='10'):
 					bookmarks[category][page]['checks'] = bookmarks[category][page]['checksAvailable']
 					bookmarks[category][page]['last_checked'] = int(time.time()/(60*60*24))
+				elif int(time.time()/(60*60*24))-bookmarks[category][page]['last_checked'] > 7 and bookmarks[category][page]['frequency']=='weekly':
+					bookmarks[category][page]['checks'] = bookmarks[category][page]['checksAvailable']
+					bookmarks[category][page]['last_checked'] = int(time.time()/(60*60*24))
+				elif int(time.time()/(60*60*24))-bookmarks[category][page]['last_checked'] > 29 and bookmarks[category][page]['frequency']=='monthly':
+					bookmarks[category][page]['checks'] = bookmarks[category][page]['checksAvailable']
+					bookmarks[category][page]['last_checked'] = int(time.time()/(60*60*24))
+					
 							
 			# Determine whether we need to redirect page
 			if target_category == category and target_name == page:
