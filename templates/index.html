@@ -1,14 +1,16 @@
 <!doctype html>
 <html>
 <head>
-<title>c.h.o.i.c.e.s.</title>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<title>Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+*{font-family: 'Roboto', sans-serif;}
 #navcontainer
 {
 margin-left: auto;
 margin-right: auto;
-margin-bottom: 40px;
+margin-bottom: 20px;
 border-top: 1px solid #999;
 z-index: 1;
 }
@@ -27,7 +29,7 @@ z-index: 2;
 {
 display: inline;
 text-align: center;
-margin: 0 5px;
+margin: 5px 5px;
 }
 
 #navcontainer li a
@@ -57,7 +59,7 @@ border-bottom: 2px solid #666;
 </style>
 </head>
 </body>
-  <h1>Flaskr</h1>
+  <h1>{{ quote }}</h1>
     {% for category in navigation %}
 		<h2>{{ category }}</h2>
 	<div id="navcontainer">

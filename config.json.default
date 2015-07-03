@@ -2,7 +2,7 @@
     "Science": {
         "PNAS": {
             "checksAvailable": 2,
-            "frequency": "friday",
+            "frequency": "wednesday",
             "url": "http://www.pnas.org/"
         },
         "Nature": {
@@ -23,7 +23,7 @@
             "url": "https://news.ycombinator.com/"
         },
         "Google News": {
-            "checksAvailable": 1,
+            "checksAvailable": 2,
             "frequency": "daily",
             "url": "https://news.google.com/"
         },
@@ -31,23 +31,11 @@
             "checksAvailable": 1,
             "frequency": "weekly",
             "url": "http://www.nytimes.com/section/science"
-        }
-    },
-    "Entertainment News": {
-        "Monkey See Blog": {
-            "checksAvailable": 1,
-            "frequency": "weekly",
-            "url": "http://www.npr.org/sections/monkeysee/"
         },
-        "Rotten Tomatoes": {
+        "NPR": {
             "checksAvailable": 1,
-            "frequency": "weekly",
-            "url": "https://www.rottentomatoes.com"
-        },
-        "Movie Reviews": {
-            "checksAvailable": 1,
-            "frequency": "weekly",
-            "url": "http://www.salon.com/writer/andrew_ohehir/"
+            "frequency": "daily",
+            "url": "http://www.npr.org/sections/news/"
         }
     }
 }
