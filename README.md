@@ -9,6 +9,7 @@ Instead of a bookmark manager, this is a tool that hosts all your bookmarks - bu
 - ~~Add CSS to lists~~
 - Add random quote from http://www.quotationspage.com/random.php3 in the top
 - Handle case when their are no links at all
+- Set ```last_checked``` to ```floor(time.time()/(60*60*24))```, so that it will easy to determine when its the next day
 
 # To run
 
