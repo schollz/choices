@@ -2,13 +2,23 @@
 
 This is a tool that is part bookmark manager, part notification system. It is a convenient webpage that you can set to your "Home" page that consists of your bookmarks sorted in categories. However, the bookmarks will disappear based on the number of times you click on them (which is user-configurable) and then they will reappear at a given frequency (also user-configurable). **Thus, it automatically keeps track of when sites are updated and lets you know - and at the same time it makes sure you don't end up visiting the same site over and over every day or over the week.** It also includes an interesting quote - because why not?
 
+Each time you visit the site it will load the new links, and keep the links that haven't been clicked on:
+
+![Before Click](https://i.imgur.com/QqS2klU.jpg)
+
+And once you click on a link (like "Hacker News") it disappears until the next day!
+
+![After Click](https://i.imgur.com/Y8eyXvM.jpg)
+
+
+
 ## How does it work?
 
-This uses [Flask](http://flask.pocoo.org/) for the web-backend. When a request is made, it uses a confg file - ```config.json``` to reload new bookmarks into the state file ```data/state.json```. This state file contains all the information about how often sites are checked, when they were last checked, how often to update, etc. This is very fast (milliseconds) but relatively simple (i.e. their are probably rampant race condition problems if you want to have concurrency).
+This uses [Flask](http://flask.pocoo.org/) for the web-backend. When a request is made, it uses a confg file - ```config.json``` to reload new bookmarks into the state file ```data/state.json```. This state file contains all the information about how often sites are checked, when they were last checked, how often to update, etc. This is very fast (milliseconds) but relatively simple (i.e. their are probably rampant race condition problems if you want to have concurrency). 
 
 ## The configuration file - ```config.json```
 
-The web site loads in the bookmarks from the ```config.json```. This config file holds the categories, pages, and then parameters for how often to reload them (daily, weekly, monthly) and how many checks are allowed during an interval. An example config.json file looks like this: 
+The web site loads in the bookmarks from the ```config.json```. This config file holds the categories, pages, and then parameters for how often to reload them (daily, weekly, monthly) and how many checks are allowed during an interval. *The ordering in the config file is the same ordering the website will use.* An example config.json file looks like this: 
 
 ```javascript
 {
