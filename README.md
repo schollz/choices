@@ -4,9 +4,9 @@ Instead of a bookmark manager, this is a tool that hosts all your bookmarks - bu
 
 # To-Do
 
-- ~Automatic update with config.json is update - update a statefile for the app (which carries the timestamp of the last config.json and all the important variables)~
-- ~Make mobile ready~
-- Add CSS to lists
+- ~~Automatic update with config.json is update - update a statefile for the app (which carries the timestamp of the last config.json and all the important variables)~~
+- ~~Make mobile ready~~
+- ~~Add CSS to lists~~
 - Add random quote from http://www.quotationspage.com/random.php3 in the top
 - Handle case when their are no links at all
 
