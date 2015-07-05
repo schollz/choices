@@ -48,20 +48,18 @@ def generate_navigation(path):
 	for category in newbookmarks:
 		if category not in bookmarks:
 			bookmarks[category] = OrderedDict()
-			for page in bookmarks[category]:
+		for page in newbookmarks[category]:
+			if page not in bookmarks[category].keys():
 				bookmarks[category][page] = newbookmarks[category][page]
-		else:
-			for page in newbookmarks[category]:
-				if page not in bookmarks[category]:
-					bookmarks[category][page] = newbookmarks[category][page]
-					bookmarks[category][page]['last_checked'] = int(time.time()/(60*60*24))
-					bookmarks[category][page]['checks'] = bookmarks[category][page]['checksAvailable']
-				else:
-					for item in newbookmarks[category][page]:
-						if bookmarks[category][page][item] != newbookmarks[category][page][item]:
-							bookmarks[category][page][item] = newbookmarks[category][page][item]
+				bookmarks[category][page]['last_checked'] = int(time.time()/(60*60*24))
+				bookmarks[category][page]['checks'] = bookmarks[category][page]['checksAvailable']
+			else:
+				for item in newbookmarks[category][page]:
+					bookmarks[category][page][item] = newbookmarks[category][page][item]
 								
 	# reordering
+	print bookmarks
+	print newbookmarks
 	reordered = OrderedDict()
 	for category in newbookmarks:
 		reordered[category] = OrderedDict()
