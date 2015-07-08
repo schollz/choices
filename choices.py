@@ -12,7 +12,7 @@ from operator import itemgetter
 def getScienceFeed():
 	articles = []
 	state = json.load(open('data/state.json','r'),object_pairs_hook=OrderedDict)
-	if 'science_feed' not in state or state['science_feed']['last_updated'] ==  int(time.time()/(60*60*24)):
+	if 'science_feed' not in state or state['science_feed']['last_updated'] !=  int(time.time()/(60*60*24)):
 		# Science Magazine
 		d = feedparser.parse('http://www.sciencemag.org/rss/current.xml')
 		for entry in d['entries']:
@@ -55,10 +55,15 @@ def getScienceFeed():
 				articles.append(article)
 				
 		articles_filtered = []
+		
+		# Filter these words out
 		summary_filter_words = ['galaxies','galaxy','supernova']
 		title_filter_words = ['Ocean','laser','microwave']
+		
+		# Highlight articles with these words
 		important_words = ['protein']
-		super_important_words = ['afm','folding']
+		super_important_words = ['afm','folding','single-molecule','single molecule']
+		
 		for article in articles:
 			passes_filter = True
 			need_to_read = False
@@ -78,7 +83,8 @@ def getScienceFeed():
 			if passes_filter or need_to_read or super_important:
 				article['need_to_read'] = need_to_read
 				article['super_important'] = super_important
-				article['summary'] = ' '.join(re.split(r'(?<=[.:;])\s', article['summary'])[:2])
+				if not (super_important or need_to_read):
+					article['summary'] = ' '.join(re.split(r'(?<=[.:;])\s', article['summary'])[:2])
 				articles_filtered.append(article)
 			
 		state['science_feed'] = {}	
