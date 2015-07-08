@@ -5,7 +5,90 @@ import time
 import os
 import random
 from collections import OrderedDict
+import feedparser
+import re
+from operator import itemgetter
 
+def getScienceFeed():
+	articles = []
+	state = json.load(open('data/state.json','r'),object_pairs_hook=OrderedDict)
+	if 'science_feed' not in state or state['science_feed']['last_updated'] ==  int(time.time()/(60*60*24)):
+		# Science Magazine
+		d = feedparser.parse('http://www.sciencemag.org/rss/current.xml')
+		for entry in d['entries']:
+			if "Report" in entry['title'] or "Research Article" in entry['title']:
+				article = {}
+				article['title'] = entry['title'].split(']')[1].strip()
+				article['summary'] = entry['summary'].split('Authors:')[0].strip()
+				article['link'] = 'http://dx.doi.org/' + entry['dc_identifier']
+				article['date'] = entry['updated']
+				article['section'] = entry['title'].split(']')[0].strip()[1:]
+				article['journal'] = 'Science'
+				articles.append(article)
+
+		# Nature 
+		d = feedparser.parse('http://feeds.nature.com/nature/rss/current')
+		for entry in d['entries']:
+			if "Article" == entry['prism_section'] or "Review" == entry['prism_section'] or "Letter" == entry['prism_section']:
+				article = {}
+				article['title'] = entry['title']
+				article['summary'] =entry['summary']
+				article['link'] = 'http://dx.doi.org/' +  entry['dc_identifier'].split('doi:')[1]
+				article['date'] = entry['updated']
+				article['section'] = entry['prism_section']
+				article['journal'] = 'Nature'
+				articles.append(article)
+
+			
+
+		# PNAS
+		d = feedparser.parse('http://www.pnas.org/rss/current.xml')
+		for entry in d['entries']:
+			if "Corrections" not in entry['prism_section'] and  "QnAs" not in entry['prism_section'] and "Commentaries" not in entry['prism_section'] and "Letters" not in entry['prism_section'] and "Opinion" not in entry['prism_section'] and "This Week" not in entry['prism_section']:
+				article = {}
+				article['title'] = entry['title'].split('[')[0]
+				article['summary'] = entry['summary']
+				article['link'] = entry['link'].split('.short')[0]
+				article['date'] = entry['updated'].split('T')[0]
+				article['section'] = entry['prism_section']
+				article['journal'] = 'PNAS'
+				articles.append(article)
+				
+		articles_filtered = []
+		summary_filter_words = ['galaxies','galaxy','supernova']
+		title_filter_words = ['Ocean','laser','microwave']
+		important_words = ['protein']
+		super_important_words = ['afm','folding']
+		for article in articles:
+			passes_filter = True
+			need_to_read = False
+			super_important = False
+			for word in summary_filter_words:
+				if word in article['summary']:
+					passes_filter = False
+			for word in title_filter_words:
+				if word in article['title']:
+					passes_filter = False
+			for word in important_words:
+				if word in article['summary'].lower() or word in article['title'].lower():
+					need_to_read = True
+			for word in super_important_words:
+				if word in article['summary'].lower() or word in article['title'].lower():
+					super_important = True
+			if passes_filter or need_to_read or super_important:
+				article['need_to_read'] = need_to_read
+				article['super_important'] = super_important
+				article['summary'] = ' '.join(re.split(r'(?<=[.:;])\s', article['summary'])[:2])
+				articles_filtered.append(article)
+			
+		state['science_feed'] = {}	
+		state['science_feed']['last_updated'] = int(time.time()/(60*60*24))
+		state['science_feed']['feed'] = articles_filtered
+		json.dump(state,open('data/state.json','w'),indent=4, separators=(',', ': '))
+		
+	newlist = sorted(state['science_feed']['feed'], key=itemgetter('date'), reverse=True)
+	return newlist
+	
 def random_line(afile):
     line = next(afile)
     for num, aline in enumerate(afile):
@@ -58,8 +141,6 @@ def generate_navigation(path):
 					bookmarks[category][page][item] = newbookmarks[category][page][item]
 								
 	# reordering
-	print bookmarks
-	print newbookmarks
 	reordered = OrderedDict()
 	for category in newbookmarks:
 		reordered[category] = OrderedDict()
@@ -88,7 +169,6 @@ def generate_navigation(path):
 			
 			# Update the checks from checksAvailable if it matches criteria
 			if int(time.time()/(60*60*24))-bookmarks[category][page]['last_checked'] > 0:
-				print "updating page " + page
 				if bookmarks[category][page]['frequency'] == 'daily' or bookmarks[category][page]['frequency'] == day_of_week or (day_of_week=='sunday' and bookmarks[category][page]['frequency']=='weekly') or bookmarks[category][page]['frequency']==day_of_month or (bookmarks[category][page]['frequency']=='monthly' and day_of_month=='10'):
 					bookmarks[category][page]['checks'] = bookmarks[category][page]['checksAvailable']
 					bookmarks[category][page]['last_checked'] = int(time.time()/(60*60*24))
@@ -102,15 +182,13 @@ def generate_navigation(path):
 							
 			# Determine whether we need to redirect page
 			if target_category == category and target_name == page:
-				print "redirecting page " + page
 				redirectUrl = bookmarks[category][page]['url']
 				bookmarks[category][page]['checks'] = bookmarks[category][page]['checks'] - 1
-				print bookmarks[category][page]['checks']
 
 			if bookmarks[category][page]['checks'] > 0:
 				if category not in navigation:
 					navigation[category] = []
-				navigation[category].append({'url':'/' + category + '/' + page, 'name':page})
+				navigation[category].append({'url':'/' + category + '/' + page, 'name':page, 'title': str(bookmarks[category][page]['checksAvailable']) + 'x ' + bookmarks[category][page]['frequency']})
 	
 	state['bookmarks']=bookmarks
 	json.dump(state,open('data/state.json','w'),indent=4, separators=(',', ': '))
@@ -126,16 +204,18 @@ def catch_all(path):
 	redirectUrl = ''
 	if 'favicon.ico' in path:
 		navigation = {}
+		science_feed = {}
 		quote = ''
 	else:
 		navigation,redirectUrl = generate_navigation(path)
+		science_feed = getScienceFeed()
 		quote = random_line(open('data/quotes.txt'))
 		
 	#print "Took ",time.time()-start
 	if len(redirectUrl)>0:
 		return redirect(redirectUrl, code=302)
 	else:
-		return render_template('index.html',navigation=navigation,quote=quote)
+		return render_template('index.html',navigation=navigation,quote=quote,science_feed = science_feed)
 
 if __name__ == '__main__':
     app.run(host='152.3.53.178',port=5000)

@@ -65,10 +65,26 @@ border-bottom: 2px solid #666;
 	<div id="navcontainer">
 	<ul id="navlist">	
 	{% for item in navigation[category] %}
-        <li><a href="{{item.url}}">{{ item.name }}</a></li>
+        <li><a href="{{item.url}}" title="{{item.title}}">{{ item.name }}</a></li>
     {% endfor %}
 	</ul>
 	</div>
     {% endfor %}
+		
+	<dl>
+		{% for item in science_feed %}
+				<dt>
+					<small>{{ item.date }}</small>
+					{% if item.need_to_read %}<strong>{% endif %}
+						<a href="{{item.link}}">{{ item.title }} ({{ item.journal }})</a>
+					{% if item.need_to_read %}</strong>{% endif %}
+				</dt>
+        <dd>
+					{% if item.super_important %}<strong>{% endif %}
+						{{ item.summary }}
+					{% if item.super_important %}</strong>{% endif %}
+				</dd>
+    {% endfor %}
+	</dl>
 </body>
 </html>
