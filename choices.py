@@ -12,7 +12,7 @@ from operator import itemgetter
 def getScienceFeed():
 	articles = []
 	state = json.load(open('data/state.json','r'),object_pairs_hook=OrderedDict)
-	if 'science_feed' not in state or state['science_feed']['last_updated'] !=  int(time.time()/(60*60*24)):
+	if 'science_feed' not in state or state['science_feed']['last_updated'] ==  int(time.time()/(60*60*24)):
 		# Science Magazine
 		d = feedparser.parse('http://www.sciencemag.org/rss/current.xml')
 		for entry in d['entries']:
@@ -39,8 +39,19 @@ def getScienceFeed():
 				article['journal'] = 'Nature'
 				articles.append(article)
 
-			
-
+		# Nature communications
+		d = feedparser.parse('http://feeds.nature.com/ncomms/rss/current')
+		for entry in d['entries']:
+			if "Corrigendum" not in entry['title']:
+				article = {}
+				article['title'] = entry['title']
+				article['summary'] = entry['summary']
+				article['link'] = 'http://dx.doi.org/' + entry['dc_identifier'].split('doi:')[1]
+				article['date'] = entry['updated']
+				article['section'] = 'Nature Communications'
+				article['journal'] = 'Nature Communications'
+				articles.append(article)
+		
 		# PNAS
 		d = feedparser.parse('http://www.pnas.org/rss/current.xml')
 		for entry in d['entries']:
@@ -53,15 +64,27 @@ def getScienceFeed():
 				article['section'] = entry['prism_section']
 				article['journal'] = 'PNAS'
 				articles.append(article)
+		
+		# JBC
+		d = feedparser.parse('http://feeds.feedburner.com/JBC_ProteinStructureAndFolding')
+		for entry in d['entries']:
+			article = {}
+			article['title'] = entry['title'].split('[')[0]
+			article['summary'] = entry['summary'].split('<img')[0]
+			article['link'] = entry['id'].split('.short')[0]
+			article['date'] = entry['updated'].split('T')[0]
+			article['section'] = entry['title'].split(']')[0].strip()[1:]
+			article['journal'] = 'JBC'
+			articles.append(article)
 				
 		articles_filtered = []
 		
 		# Filter these words out
-		summary_filter_words = ['galaxies','galaxy','supernova']
-		title_filter_words = ['Ocean','laser','microwave']
+		summary_filter_words = ['galaxies','galaxy','supernova','immunological','transplant','microrna','leuko','histone','cytoskeleton','spin ','pet','transcription factor','hiv-1','microwave','superconductor','crystallographic','spin-','monolayer','sox9','cd1','cryo-em','glycoprotein','kinase','cancer','insulin','GPCR']
+		title_filter_words = ['ocean','laser','microwave','clinical','quantum','microrna','leuko','histone','cytoskeleton','spin ','pet','transcription factor','hiv-1','superconductor','crystallographic','spin-','monolayer','sox9','cd1','cryo-em','membrane','pump','toxicity','kinase','tau','allosteric','integrin','hepatitis','assembly','epitope','cancer','GPCR']
 		
 		# Highlight articles with these words
-		important_words = ['protein']
+		important_words = []
 		super_important_words = ['afm','folding','single-molecule','single molecule']
 		
 		for article in articles:
@@ -69,10 +92,10 @@ def getScienceFeed():
 			need_to_read = False
 			super_important = False
 			for word in summary_filter_words:
-				if word in article['summary']:
+				if word in article['summary'].lower():
 					passes_filter = False
 			for word in title_filter_words:
-				if word in article['title']:
+				if word in article['title'].lower():
 					passes_filter = False
 			for word in important_words:
 				if word in article['summary'].lower() or word in article['title'].lower():

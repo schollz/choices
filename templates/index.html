@@ -56,6 +56,26 @@ border: 1px solid #666;
 border-top: 2px solid #666;
 border-bottom: 2px solid #666;
 }
+
+  dl {
+    border: 3px double #ccc;
+    padding: 0.5em;
+  }
+  dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+    color: green;
+  }
+  dt:after {
+    content: ":";
+  }
+  dd {
+    margin: 0 0 0 110px;
+    padding: 0 0 0.5em 0;
+  }
 </style>
 </head>
 </body>
@@ -76,10 +96,13 @@ border-bottom: 2px solid #666;
 		{% for item in science_feed %}
 				<dt>
 					<small>{{ item.date }}</small>
-					{% if item.need_to_read %}<strong>{% endif %}
+					
+				</dt>
+				<dd>
+				{% if item.need_to_read %}<strong>{% endif %}
 						<a href="{{item.link}}">{{ item.title }} ({{ item.journal }})</a>
 					{% if item.need_to_read %}</strong>{% endif %}
-				</dt>
+					</dd>
         <dd>
 					{% if item.super_important %}<strong>{% endif %}
 						{{ item.summary }}
