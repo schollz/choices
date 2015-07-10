@@ -26,6 +26,19 @@ def getScienceFeed():
 				article['journal'] = 'Science'
 				articles.append(article)
 
+		# Cell
+		d = feedparser.parse('http://www.cell.com/cell/current.rss')
+		for entry in d['entries']:
+			if "Article" in entry['prism_section']:
+				article = {}
+				article['title'] = entry['title']
+				article['summary'] = entry['summary'].split('Authors:')[0].strip()
+				article['link'] = 'http://dx.doi.org/' + entry['dc_identifier']
+				article['date'] = entry['updated']
+				article['section'] = entry['prism_section']
+				article['journal'] = 'Cell'
+				articles.append(article)
+		
 		# Nature 
 		d = feedparser.parse('http://feeds.nature.com/nature/rss/current')
 		for entry in d['entries']:
@@ -80,8 +93,8 @@ def getScienceFeed():
 		articles_filtered = []
 		
 		# Filter these words out
-		summary_filter_words = ['galaxies','galaxy','supernova','immunological','transplant','microrna','leuko','histone','cytoskeleton','spin ','pet','transcription factor','hiv-1','microwave','superconductor','crystallographic','spin-','monolayer','sox9','cd1','cryo-em','glycoprotein','kinase','cancer','insulin','GPCR']
-		title_filter_words = ['ocean','laser','microwave','clinical','quantum','microrna','leuko','histone','cytoskeleton','spin ','pet','transcription factor','hiv-1','superconductor','crystallographic','spin-','monolayer','sox9','cd1','cryo-em','membrane','pump','toxicity','kinase','tau','allosteric','integrin','hepatitis','assembly','epitope','cancer','GPCR']
+		summary_filter_words = ['graphene','structural','membrane','errat','galaxies','galaxy','supernova','immunological','transplant','microrna','leuko','histone','cytoskeleton','spin ','pet','transcription factor','hiv-1','microwave','superconductor','crystallographic','spin-','monolayer','sox9','cd1','cryo-em','glycoprotein','kinase','cancer','insulin','GPCR']
+		title_filter_words = ['ocean','laser','graphene','regulation','structural','errat','microwave','clinical','quantum','microrna','leuko','histone','cytoskeleton','spin ','pet','transcription factor','hiv-1','superconductor','crystallographic','spin-','monolayer','sox9','cd1','cryo-em','membrane','pump','toxicity','kinase','tau','allosteric','integrin','hepatitis','assembly','epitope','cancer','GPCR']
 		
 		# Highlight articles with these words
 		important_words = []
