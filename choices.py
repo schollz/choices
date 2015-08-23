@@ -120,7 +120,7 @@ def getScienceFeed():
                 article['need_to_read'] = need_to_read
                 article['super_important'] = super_important
                 if not (super_important or need_to_read):
-                    article['summary'] = ' '.join(re.split(r'(?<=[.:;])\s', article['summary'])[:2])
+                    article['summary'] = ' '.join(re.split(r'(?<=[.:;])\s', article['summary'])[:10])
                 articles_filtered.append(article)
             
         state['science_feed'] = {}    
@@ -262,4 +262,4 @@ def catch_all(path):
         return render_template('index.html',navigation=navigation,quote=quote,science_feed = science_feed)
 
 if __name__ == '__main__':
-    app.run(host='152.3.53.178',port=5000)
+    app.run(host='192.168.1.22',port=8009,debug=True)

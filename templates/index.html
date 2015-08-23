@@ -57,25 +57,50 @@ border-top: 2px solid #666;
 border-bottom: 2px solid #666;
 }
 
-  dl {
-    border: 3px double #ccc;
-    padding: 0.5em;
-  }
-  dt {
-    float: left;
-    clear: left;
-    width: 100px;
-    text-align: right;
-    font-weight: bold;
-    color: green;
-  }
-  dt:after {
-    content: ":";
-  }
-  dd {
-    margin: 0 0 0 110px;
-    padding: 0 0 0.5em 0;
-  }
+
+#navcontainer2 { margin-left: 30px; }
+
+#navcontainer2 ul
+{
+margin: 0;
+padding: 0;
+list-style-type: none;
+font-family: verdana, arial, sans-serif;
+}
+
+#navcontainer2 li { margin: 0; }
+
+#navcontainer2 a
+{
+display: block;
+color: #333;
+background-color: transparent;
+padding: 2px 10px;
+text-decoration: none;
+border-top: 1px solid #aaa;
+border-bottom: 1px solid #aaa;
+border-left: 1px solid #aaa;
+font-size: 16px;
+border-right: 10px solid #aaa;
+}
+
+#navcontainer2 a:hover
+{
+background-color: #ddd;
+color: #333;
+border-right: 10px solid #aaa;
+padding: 2px 1px 2px 10px;
+}
+
+#navcontainer2 ul ul
+{
+margin-left: 30px;
+padding: 0;
+list-style-type: none;
+}
+
+
+
 </style>
 </head>
 </body>
@@ -92,23 +117,37 @@ border-bottom: 2px solid #666;
     {% endfor %}
 	
 	<h2>Science Feed</h2>
-	<dl>
+
+    <div id="navcontainer2">
+    <ul id="navlist">
+        {% set count = 1 %}
 		{% for item in science_feed %}
-				<dt>
-					<small>{{ item.date }}</small>
-					
-				</dt>
-				<dd>
+        {% set count = count + 1 %}
+<li>
 				{% if item.need_to_read %}<strong>{% endif %}
-						<a href="{{item.link}}">{{ item.title }} ({{ item.journal }})</a>
+						<a href=
+                        "javascript:ReverseDisplay('item{{ count }}')">{{ item.title }}</a>
 					{% if item.need_to_read %}</strong>{% endif %}
-					</dd>
-        <dd>
+
+                    <div id="item{{ count }}"  style="display:none;">
+                 <p>
 					{% if item.super_important %}<strong>{% endif %}
-						{{ item.summary }}
+						{{ item.summary }} <a href="{{item.link}}">{{ item.journal }}</a>
 					{% if item.super_important %}</strong>{% endif %}
-				</dd>
+                </p>
+                </div>
+                </li>
     {% endfor %}
-	</dl>
+    </ul>
+</div>
+    
+    <script language = "JavaScript" type = "text/javascript" > function ReverseDisplay(d) {
+    if (document.getElementById(d).style.display == "none") {
+        document.getElementById(d).style.display = "block";
+    } else {
+        document.getElementById(d).style.display = "none";
+    }
+} 
+</script>
 </body>
 </html>
